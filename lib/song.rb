@@ -48,4 +48,22 @@ class Song
     @@all.sort{|song_1, song_2| song_1.name <=> song_2.name}
   end
 
+  def self.new_from_filename(filename)
+    song = self.new
+    artist_name = filename.split("-")[0].strip
+    song.artist_name = artist_name
+
+    name = filename.split("-")[1].strip
+    song.name = name.chomp(".mp3")
+    song
+  end
+
+  def self.create_from_filename(filename)
+    @@all << self.new_from_filename(filename)
+  end
+
+  def self.destroy_all
+    @@all.clear
+  end
+
 end
